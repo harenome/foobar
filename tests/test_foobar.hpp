@@ -93,8 +93,6 @@ public:
      */
     void test_copy_constructor (void)
     {
-        foobar * f[3][4];
-
         for (unsigned int i = 0; i < _messages_length; ++i)
             for (unsigned int j = 0; j < _values_length; ++j)
             {
