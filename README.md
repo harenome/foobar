@@ -1,6 +1,8 @@
 Foobar
 ======
 
+[![Build Status](https://travis-ci.org/Harenome/foobar.svg?branch=master)](https://travis-ci.org/Harenome/foobar)
+
 Just testing. Getting to know how to use [Travis CI](https://travis-ci.org/ "Travis CI website") and [Coveralls](https://coveralls.io/ "Coveralls website"). No big deal.
 
 License
