@@ -1,0 +1,13 @@
+language: cpp
+
+compiler:
+    - g++
+before_install:
+    - sudo add-apt-repository ppa:dhart/ppa
+    - sudo apt-get update -q
+    - sudo apt-get install cxxtest
+    - sudo pip install cpp-coveralls
+script:
+    - make && bin/runner
+after_success:
+    - coveralls --exclude lib --exclude tests

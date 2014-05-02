@@ -1,0 +1,11 @@
+bin/
+obj/
+lib/
+tests/*.cpp
+
+*.o
+*.a
+tags
+.tags
+~*
+*.tar.gz
