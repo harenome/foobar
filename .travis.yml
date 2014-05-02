@@ -9,6 +9,7 @@ before_install:
     - sudo pip install cpp-coveralls
     - export PATH=$PATH:/usr/bin
 script:
+    - locate cxxtest
     - make && bin/runner
 after_success:
     - coveralls --exclude lib --exclude tests
