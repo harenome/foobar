@@ -10,12 +10,12 @@ PATH_INCLUDE = include
 FLAGS_GCOV = -fprofile-arcs -ftest-coverage
 FLAGS_DBG = -g -Wall $(FLAGS_GCOV)
 FLAGS_CC = -std=c++98 -pedantic $(FLAGS_DBG)
-FLAGS_INCLUDE = -I$(PATH_INCLUDE)
+FLAGS_INCLUDE = -I$(PATH_INCLUDE) -I$(PATH_TESTS)
 FLAGS_LIB = -L$(PATH_LIB)
 
 MISC_FILES = makefile Doxyfile AUTHORS COPYING LICENSE README README.md
 
-vpath %.cpp $(PATH_SRC)
+vpath %.cpp $(PATH_SRC) $(PATH_TESTS)
 vpath %.hpp $(PATH_INCLUDE) $(PATH_TESTS)
 vpath %.o $(PATH_OBJ)
 vpath %.a $(PATH_LIB)
