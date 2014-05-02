@@ -1,5 +1,5 @@
 CC = g++
-TEST_GEN = cxxtestgen
+TEST_GEN = /usr/bin/cxxtestgen
 
 PATH_SRC = src
 PATH_OBJ = obj
@@ -22,6 +22,10 @@ vpath %.o $(PATH_OBJ)
 vpath %.a $(PATH_LIB)
 
 all: main tests
+
+gcov: tests
+		@bin/runner &> /dev/null
+		@gcov -r runner
 
 %.o: %.cpp | obj_dir
 		$(CC) $(FLAGS_CC) $(FLAGS_INCLUDE) -o $(PATH_OBJ)/$@ -c $<
@@ -70,8 +74,12 @@ cleanarchives: clean_archives
 clean_archives:
 		@rm -rf $(shell basename `pwd`)_*.tar.gz
 
+cleangcov: clean_gcov
+clean_gcov:
+		@rm -rf *.gcno *.gcda *.gcov
+
 cleanall: clean_all
-clean_all: clean clean_doc clean_tests clean_archives
+clean_all: clean clean_doc clean_tests clean_archives clean_gcov
 		@echo "Clean."
 
 archive:
