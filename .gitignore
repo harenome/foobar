@@ -9,3 +9,7 @@ tags
 .tags
 ~*
 *.tar.gz
+
+*.gcno
+*.gcda
+*.gcov
