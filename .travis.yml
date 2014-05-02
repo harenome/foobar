@@ -7,7 +7,7 @@ before_install:
     - sudo apt-get update -q
     - sudo apt-get -y install cxxtest
     - sudo pip install cpp-coveralls
-    - export PATH=$PATH:/usr/bin
+    - sudo ln -s /usr/bin/cxxtestgen.py /usr/bin/cxxtestgen
 script:
     - make && bin/runner
 after_success:

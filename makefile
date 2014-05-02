@@ -1,5 +1,4 @@
 CC = g++
-TEST_GEN = /usr/bin/cxxtestgen
 
 PATH_SRC = src
 PATH_OBJ = obj
@@ -44,7 +43,7 @@ tests: runner.cpp libfoobar.a | bin_dir
 		$(CC) $(FLAGS_LIB) $(FLAGS_INCLUDE) -o $(PATH_BIN)/runner $(PATH_TESTS)/runner.cpp -lfoobar --coverage
 
 runner.cpp: test_foobar.hpp
-		$(TEST_GEN) --error-printer -o $(PATH_TESTS)/runner.cpp $(PATH_TESTS)/test_foobar.hpp
+		cxxtestgen --error-printer -o $(PATH_TESTS)/runner.cpp $(PATH_TESTS)/test_foobar.hpp
 
 obj_dir:
 	 	@mkdir -p $(PATH_OBJ)
