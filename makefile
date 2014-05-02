@@ -20,11 +20,7 @@ vpath %.hpp $(PATH_INCLUDE) $(PATH_TESTS)
 vpath %.o $(PATH_OBJ)
 vpath %.a $(PATH_LIB)
 
-all: main tests
-
-gcov: tests
-		@bin/runner
-		@gcov runner
+all: main
 
 %.o: %.cpp | obj_dir
 		$(CC) $(FLAGS_CC) $(FLAGS_INCLUDE) -o $(PATH_OBJ)/$@ -c $<
@@ -39,11 +35,15 @@ libfoobar.a: foobar.o | lib_dir
 		ar -crv $(PATH_LIB)/libfoobar.a $(PATH_OBJ)/foobar.o
 		ranlib $(PATH_LIB)/libfoobar.a
 
-tests: runner.cpp libfoobar.a | bin_dir
-		$(CC) $(FLAGS_LIB) $(FLAGS_INCLUDE) -o $(PATH_BIN)/runner $(PATH_TESTS)/runner.cpp -lfoobar --coverage
+tests: runner.o libfoobar.a | bin_dir
+		$(CC) $(FLAGS_LIB) -o $(PATH_BIN)/runner $(PATH_OBJ)/runner.o -lfoobar --coverage
+		@bin/runner
 
 runner.cpp: test_foobar.hpp
 		cd $(PATH_TESTS) && cxxtestgen --error-printer -o runner.cpp test_foobar.hpp
+
+runner.o: runner.cpp
+		$(CC) $(FLAGS_CC) $(FLAGS_INCLUDE) -o $(PATH_OBJ)/runner.o -c $(PATH_TESTS)/runner.cpp
 
 obj_dir:
 	 	@mkdir -p $(PATH_OBJ)
