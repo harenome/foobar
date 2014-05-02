@@ -9,6 +9,6 @@ before_install:
     - sudo pip install cpp-coveralls
     - sudo ln -s /usr/bin/cxxtestgen.py /usr/bin/cxxtestgen
 script:
-    - make && bin/runner
+    - make && make gcov
 after_success:
     - coveralls --exclude lib --exclude tests

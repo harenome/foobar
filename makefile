@@ -23,8 +23,8 @@ vpath %.a $(PATH_LIB)
 all: main tests
 
 gcov: tests
-		@bin/runner &> /dev/null
-		@gcov -r runner
+		@bin/runner
+		@gcov runner
 
 %.o: %.cpp | obj_dir
 		$(CC) $(FLAGS_CC) $(FLAGS_INCLUDE) -o $(PATH_OBJ)/$@ -c $<
