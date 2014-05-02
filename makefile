@@ -8,7 +8,8 @@ PATH_LIB = lib
 PATH_TESTS = tests
 PATH_INCLUDE = include
 
-FLAGS_DBG = -g -Wall --enable-gcov
+FLAGS_GCOV = -fprofile-arcs -ftest-coverage
+FLAGS_DBG = -g -Wall $(FLAGS_GCOV)
 FLAGS_CC = -std=c++98 -pedantic $(FLAGS_DBG)
 FLAGS_INCLUDE = -I$(PATH_INCLUDE)
 FLAGS_LIB = -L$(PATH_LIB)
@@ -26,7 +27,7 @@ all: main tests
 		$(CC) $(FLAGS_CC) $(FLAGS_INCLUDE) -o $(PATH_OBJ)/$@ -c $<
 
 main: main.o libfoobar.a | bin_dir
-		$(CC) $(FLAGS_LIB) -o $(PATH_BIN)/$@ $(PATH_OBJ)/main.o -lfoobar
+		$(CC) $(FLAGS_LIB) -o $(PATH_BIN)/$@ $(PATH_OBJ)/main.o -lfoobar --coverage
 
 foobar.o: foobar.cpp foobar.hpp
 main.o: main.cpp foobar.hpp
@@ -36,7 +37,7 @@ libfoobar.a: foobar.o | lib_dir
 		ranlib $(PATH_LIB)/libfoobar.a
 
 tests: runner.cpp libfoobar.a | bin_dir
-		$(CC) $(FLAGS_LIB) $(FLAGS_INCLUDE) -o $(PATH_BIN)/runner $(PATH_TESTS)/runner.cpp -lfoobar
+		$(CC) $(FLAGS_LIB) $(FLAGS_INCLUDE) -o $(PATH_BIN)/runner $(PATH_TESTS)/runner.cpp -lfoobar --coverage
 
 runner.cpp: test_foobar.hpp
 		$(TEST_GEN) --error-printer -o $(PATH_TESTS)/runner.cpp $(PATH_TESTS)/test_foobar.hpp
