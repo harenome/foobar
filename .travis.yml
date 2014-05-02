@@ -11,4 +11,4 @@ before_install:
 script:
     - make && make tests
 after_success:
-    - coveralls -b obj
+    - coveralls --verbose -b obj
